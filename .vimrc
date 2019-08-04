@@ -16,6 +16,7 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 autocmd! GUIEnter * set vb t_vb=
 let mapleader = ','
 set completeopt-=preview
@@ -74,8 +75,8 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-colorscheme molokai
-let g:rehash256 = 1
+"colorscheme molokai
+"let g:rehash256 = 1
  
 let g:airline#extensions#tabline#enabled = 1
 
@@ -83,7 +84,7 @@ let g:airline#extensions#tabline#enabled = 1
 noremap § <esc>
 vnoremap § <esc>
 :tnoremap <Esc> <C-\><C-n>
-:set shell=/usr/local/bin/zsh
+":set shell=/usr/local/bin/zsh
 if has('nvim')
   let $GIT_EDITOR = 'nvr -cc split --remote-wait'
 endif
