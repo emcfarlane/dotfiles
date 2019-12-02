@@ -1,8 +1,23 @@
 syntax on
 filetype plugin indent on
+set autoindent
+set backspace=indent,eol,start
+set complete-=i
+set smarttab
+set laststatus=2
+set ruler
+set wildmenu
+set scrolloff=1
+set sidescrolloff=5
+set display+=lastline
+set encoding=utf-8
 set number
 set autoread
 set hidden
+set history=1000
+set tabpagemax=50
+set viminfo^=!
+set sessionoptions-=options
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2 expandtab
 autocmd Filetype json setlocal ts=2 sts=2 sw=2
 autocmd Filetype css setlocal ts=2 sts=2 sw=2
@@ -19,8 +34,8 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 autocmd! GUIEnter * set vb t_vb=
 let mapleader = ','
-set completeopt-=preview
-set completeopt+=longest,menuone,noselect
+"set completeopt-=preview
+"set completeopt+=longest,menuone,noselect
 set shortmess+=c   " Shut off completion messages
 set belloff+=ctrlg " If Vim beeps during completion
 
@@ -37,8 +52,8 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-"colorscheme molokai
-"let g:rehash256 = 1
+colorscheme molokai
+let g:rehash256 = 1
  
 let g:airline#extensions#tabline#enabled = 1
 
@@ -51,6 +66,20 @@ if has('nvim')
   let $GIT_EDITOR = 'nvr -cc split --remote-wait'
 endif
 autocmd FileType gitcommit set bufhidden=delete
+
+" codefmt
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+  autocmd FileType rust AutoFormatBuffer rustfmt
+  autocmd FileType vue AutoFormatBuffer prettier
+augroup END
 
 " coc.nvim
 set nobackup
@@ -147,7 +176,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
