@@ -1,4 +1,4 @@
-syntax on
+syntax off
 filetype plugin indent on
 set autoindent
 set backspace=indent,eol,start
@@ -34,8 +34,8 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 autocmd! GUIEnter * set vb t_vb=
 let mapleader = ','
-"set completeopt-=preview
-"set completeopt+=longest,menuone,noselect
+set completeopt-=preview
+set completeopt+=longest,menuone,noselect,noinsert
 set shortmess+=c   " Shut off completion messages
 set belloff+=ctrlg " If Vim beeps during completion
 
@@ -52,7 +52,7 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-colorscheme molokai
+autocmd VimEnter * colorscheme molokai
 let g:rehash256 = 1
  
 let g:airline#extensions#tabline#enabled = 1
@@ -68,6 +68,9 @@ endif
 autocmd FileType gitcommit set bufhidden=delete
 
 " codefmt
+" Run Glaive setup after plugins have loaded
+autocmd VimEnter * Glaive codefmt rustfmt_options=`['--edition=2018']`
+autocmd VimEnter * Glaive codefmt gofmt_executable='goimports'
 augroup autoformat_settings
   autocmd FileType bzl AutoFormatBuffer buildifier
   autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
