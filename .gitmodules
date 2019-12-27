@@ -7,3 +7,21 @@
 [submodule ".vim/pack/default/start/vim-mucomplete"]
 	path = .vim/pack/default/start/vim-mucomplete
 	url = git@github.com:lifepillar/vim-mucomplete.git
+[submodule ".vim/pack/default/start/vim-codefmt"]
+	path = .vim/pack/default/start/vim-codefmt
+	url = git@github.com:google/vim-codefmt.git
+[submodule ".vim/pack/default/start/vim-maktaba"]
+	path = .vim/pack/default/start/vim-maktaba
+	url = git@github.com:google/vim-maktaba.git
+[submodule ".vim/pack/default/start/coc.nvim"]
+	path = .vim/pack/default/start/coc.nvim
+	url = git@github.com:neoclide/coc.nvim.git
+[submodule ".vim/pack/default/start/vim-glaive"]
+	path = .vim/pack/default/start/vim-glaive
+	url = git@github.com:google/vim-glaive.git
+[submodule ".vim/pack/default/start/vim-fugitive"]
+	path = .vim/pack/default/start/vim-fugitive
+	url = git@github.com:tpope/vim-fugitive.git
+[submodule ".vim/pack/default/start/vim-surround"]
+	path = .vim/pack/default/start/vim-surround
+	url = git@github.com:tpope/vim-surround.git
