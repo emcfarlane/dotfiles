@@ -38,6 +38,7 @@ set completeopt-=preview
 set completeopt+=longest,menuone,noselect,noinsert
 set shortmess+=c   " Shut off completion messages
 set belloff+=ctrlg " If Vim beeps during completion
+set rtp+=~/bin
 
 " fzf
 set rtp+=/usr/local/opt/fzf
