@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/Users/edward/src/github.com/afking/afking.github.io/posts'
+let g:netrw_dirhist_3='/Users/edward/src/github.com/afking/afking.github.io'
+let g:netrw_dirhist_2='/Users/edward/src/github.com/afking/afking.github.io/posts'
+let g:netrw_dirhist_1='/Users/edward/src/github.com/afking/afking.github.io'
+let g:netrw_dirhist_0='/Users/edward/src/github.com/afking/hello/src'
+let g:netrw_dirhist_9='/Users/edward/src/github.com/afking/hello'
+let g:netrw_dirhist_8='/Users/edward/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.12.35/src/service'
+let g:netrw_dirhist_7='/Users/edward/src/github.com/afking/hello/src'
+let g:netrw_dirhist_6='/Users/edward/.vim/pack/main/start/vim-codefmt/doc'
+let g:netrw_dirhist_5='/Users/edward/.vim/pack/main/start/vim-codefmt'

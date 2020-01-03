@@ -23,10 +23,12 @@ autocmd Filetype json setlocal ts=2 sts=2 sw=2
 autocmd Filetype css setlocal ts=2 sts=2 sw=2
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType bazel setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType bzl setlocal ts=4 sts=4 sw=4 expandtab
 autocmd FileType star setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType elm setlocal ts=4 sts=4 sw=4 expandtab autocmd Filetype html setlocal ts=2 sw=2 expandtab
+autocmd FileType elm setlocal ts=4 sts=4 sw=4 expandtab
+autocmd Filetype html setlocal ts=2 sw=2 expandtab
 autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
+autocmd BufRead,BufNewFile *.tmpl set filetype=tmpl
+autocmd Filetype tmpl setlocal ts=2 sw=2 expandtab
 set noerrorbells
 set novisualbell
 set t_vb=
