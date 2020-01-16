@@ -21,3 +21,4 @@
 /production
 /.sass-cache
 .DS_Store
+.netrwhist
