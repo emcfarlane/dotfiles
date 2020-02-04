@@ -46,7 +46,7 @@ set rtp+=~/bin
 set rtp+=/usr/local/opt/fzf
 nmap ; :Buffers<CR>
 command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)
 nmap <Leader>t :Files<CR>
 nmap <Leader>r :Tags<CR>
 
