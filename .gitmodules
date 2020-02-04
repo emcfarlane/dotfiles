@@ -25,3 +25,6 @@
 [submodule ".vim/pack/default/start/vim-surround"]
 	path = .vim/pack/default/start/vim-surround
 	url = git@github.com:tpope/vim-surround.git
+[submodule ".vim/pack/default/start/vim-rhubarb"]
+	path = .vim/pack/default/start/vim-rhubarb
+	url = git@github.com:tpope/vim-rhubarb.git
