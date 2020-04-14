@@ -18,6 +18,7 @@ set history=1000
 set tabpagemax=50
 set viminfo^=!
 set sessionoptions-=options
+set number relativenumber " relative line numbers
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2 expandtab
 autocmd Filetype json setlocal ts=2 sts=2 sw=2
 autocmd Filetype css setlocal ts=4 sts=4 sw=4 expandtab
