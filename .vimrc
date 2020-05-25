@@ -30,6 +30,7 @@ autocmd Filetype html setlocal ts=2 sw=2 expandtab
 autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
 autocmd BufRead,BufNewFile *.tmpl set filetype=tmpl
 autocmd Filetype tmpl setlocal ts=2 sw=2 expandtab
+autocmd Filetype proto setlocal ts=2 sw=2 expandtab
 set noerrorbells
 set novisualbell
 set t_vb=
@@ -50,6 +51,7 @@ command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)
 nmap <Leader>t :Files<CR>
 nmap <Leader>r :Tags<CR>
+nmap <Leader>g :GFiles<CR>
 
 function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
