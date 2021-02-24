@@ -11,12 +11,18 @@
                 }
             }
         },
-
         "golang": {
             "command": "gopls",
-						"args": ["serve", "-debug", "localhost:8484", "-rpc.trace"],
+            "args": ["serve", "-debug", "localhost:8484", "-rpc.trace"],
             "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+            "trace.server": "verbose",
             "filetypes": ["go"]
+        },
+        "terraform": {
+            "command": "terraform-lsp",
+            "filetypes": ["terraform"],
+            "initializationOptions": {}
         }
-    }
+    },
+    "coc.preferences.formatOnSaveFiletypes": []
 }
