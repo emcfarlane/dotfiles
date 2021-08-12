@@ -25,3 +25,6 @@
 [submodule ".config/nvim/pack/default/start/nvim-compe"]
 	path = .config/nvim/pack/default/start/nvim-compe
 	url = git@github.com:hrsh7th/nvim-compe.git
+[submodule ".config/nvim/pack/default/start/fzf"]
+	path = .config/nvim/pack/default/start/fzf
+	url = git@github.com:junegunn/fzf.git
