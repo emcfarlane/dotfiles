@@ -1,30 +1,30 @@
-[submodule "vim/pack/default/start/fzf.vim"]
-	path = vim/pack/default/start/fzf.vim
-	url = git@github.com:junegunn/fzf.vim.git
 [submodule ".vim/pack/default/start/fzf.vim"]
-	path = .vim/pack/default/start/fzf.vim
+	path = .config/nvim/pack/default/start/fzf.vim
 	url = git@github.com:junegunn/fzf.vim.git
-[submodule ".vim/pack/default/start/vim-mucomplete"]
-	path = .vim/pack/default/start/vim-mucomplete
-	url = git@github.com:lifepillar/vim-mucomplete.git
 [submodule ".vim/pack/default/start/vim-codefmt"]
-	path = .vim/pack/default/start/vim-codefmt
+	path = .config/nvim/pack/default/start/vim-codefmt
 	url = git@github.com:google/vim-codefmt.git
 [submodule ".vim/pack/default/start/vim-maktaba"]
-	path = .vim/pack/default/start/vim-maktaba
+	path = .config/nvim/pack/default/start/vim-maktaba
 	url = git@github.com:google/vim-maktaba.git
-[submodule ".vim/pack/default/start/coc.nvim"]
-	path = .vim/pack/default/start/coc.nvim
-	url = git@github.com:neoclide/coc.nvim.git
 [submodule ".vim/pack/default/start/vim-glaive"]
-	path = .vim/pack/default/start/vim-glaive
+	path = .config/nvim/pack/default/start/vim-glaive
 	url = git@github.com:google/vim-glaive.git
 [submodule ".vim/pack/default/start/vim-fugitive"]
-	path = .vim/pack/default/start/vim-fugitive
+	path = .config/nvim/pack/default/start/vim-fugitive
 	url = git@github.com:tpope/vim-fugitive.git
 [submodule ".vim/pack/default/start/vim-surround"]
-	path = .vim/pack/default/start/vim-surround
+	path = .config/nvim/pack/default/start/vim-surround
 	url = git@github.com:tpope/vim-surround.git
 [submodule ".vim/pack/default/start/vim-rhubarb"]
-	path = .vim/pack/default/start/vim-rhubarb
+	path = .config/nvim/pack/default/start/vim-rhubarb
 	url = git@github.com:tpope/vim-rhubarb.git
+[submodule ".config/nvim/pack/default/start/nvim-lspconfig"]
+	path = .config/nvim/pack/default/start/nvim-lspconfig
+	url = git@github.com:neovim/nvim-lspconfig.git
+[submodule ".config/nvim/pack/default/start/nvim-compe"]
+	path = .config/nvim/pack/default/start/nvim-compe
+	url = git@github.com:hrsh7th/nvim-compe.git
+[submodule ".config/nvim/pack/default/start/fzf"]
+	path = .config/nvim/pack/default/start/fzf
+	url = git@github.com:junegunn/fzf.git
