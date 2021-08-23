@@ -37,7 +37,7 @@ autocmd Filetype json setlocal ts=2 sts=2 sw=2
 autocmd Filetype css setlocal ts=4 sts=4 sw=4 expandtab
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType bazel setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType star,bzl setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType starlark,star,bzl setlocal ts=4 sts=4 sw=4 expandtab
 autocmd FileType elm setlocal ts=4 sts=4 sw=4 expandtab
 autocmd Filetype html setlocal ts=2 sw=2 expandtab
 autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
@@ -113,7 +113,12 @@ augroup autoformat_settings
   autocmd FileType python AutoFormatBuffer yapf
   autocmd FileType rust AutoFormatBuffer rustfmt
   autocmd FileType vue,javascript,typescriptreact AutoFormatBuffer prettier
+  autocmd FileType starlark AutoFormatBuffer buildifier
 augroup END
+
+" Set the filetype based on the file's extension, but only if
+" 'filetype' has not already been set
+au BufRead,BufNewFile *.star setfiletype starlark
 
 " lsp autocomplete
 " https://github.com/ThePrimeagen/.dotfiles/blob/master/nvim/.config/nvim/plugin/lsp.vim
