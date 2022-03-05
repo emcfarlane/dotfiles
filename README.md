@@ -12,3 +12,5 @@ Update a submodule, cd into directory then:
 git fetch
 git merge origin/master
 ```
+
+### tmux 

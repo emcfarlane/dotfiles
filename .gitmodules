@@ -28,3 +28,6 @@
 [submodule ".config/nvim/pack/default/start/fzf"]
 	path = .config/nvim/pack/default/start/fzf
 	url = git@github.com:junegunn/fzf.git
+[submodule ".tmux/plugins/tpm"]
+	path = .tmux/plugins/tpm
+	url = git@github.com:tmux-plugins/tpm.git

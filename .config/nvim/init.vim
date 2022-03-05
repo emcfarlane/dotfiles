@@ -10,7 +10,9 @@ set wildignore+=**/coverage/*
 set wildignore+=**/node_modules/*
 set wildignore+=**/android/*
 set wildignore+=**/ios/*
+set clipboard=unnamed
 
+set mouse=a
 syntax off
 filetype plugin indent on
 set autoindent
@@ -101,12 +103,13 @@ autocmd FileType gitcommit set bufhidden=delete
 " codefmt
 " Run Glaive setup after plugins have loaded
 autocmd VimEnter * Glaive codefmt rustfmt_options=`['--edition=2018']`
-autocmd VimEnter * Glaive codefmt gofmt_executable='goimports'
+" autocmd VimEnter * Glaive codefmt gofmt_executable='goimports'
 augroup autoformat_settings
+  " autocmd Filetype mdx AutoFormatBuffer prettier
   autocmd FileType bzl AutoFormatBuffer buildifier
   autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
   autocmd FileType dart AutoFormatBuffer dartfmt
-  autocmd FileType go AutoFormatBuffer gofmt
+  " autocmd FileType go AutoFormatBuffer gofmt
   autocmd FileType gn AutoFormatBuffer gn
   autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer prettier
   autocmd FileType java AutoFormatBuffer google-java-format
@@ -119,6 +122,7 @@ augroup END
 " Set the filetype based on the file's extension, but only if
 " 'filetype' has not already been set
 au BufRead,BufNewFile *.star setfiletype starlark
+au BufRead,BufNewFile *.mdx setfiletype mdx
 
 " lsp autocomplete
 " https://github.com/ThePrimeagen/.dotfiles/blob/master/nvim/.config/nvim/plugin/lsp.vim
@@ -146,5 +150,7 @@ let g:compe.source.calc = v:true
 let g:compe.source.nvim_lsp = v:true
 let g:compe.source.nvim_lua = v:true
 let g:compe.source.vsnip = v:true
+
+autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 3000)
 
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
