@@ -31,3 +31,6 @@
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = git@github.com:tmux-plugins/tpm.git
+[submodule ".config/nvim/pack/default/start/zig.vim"]
+	path = .config/nvim/pack/default/start/zig.vim
+	url = git@github.com:ziglang/zig.vim.git

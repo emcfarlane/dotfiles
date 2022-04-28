@@ -1,3 +1,4 @@
+set nocompatible
 set path+=**
 
 " Nice menu when typing `:find *.py`
@@ -10,7 +11,6 @@ set wildignore+=**/coverage/*
 set wildignore+=**/node_modules/*
 set wildignore+=**/android/*
 set wildignore+=**/ios/*
-set clipboard=unnamed
 
 set mouse=a
 syntax off
@@ -47,6 +47,8 @@ autocmd BufRead,BufNewFile *.tmpl set filetype=tmpl
 autocmd Filetype tmpl setlocal ts=2 sw=2 expandtab
 autocmd Filetype proto setlocal ts=2 sw=2 expandtab
 autocmd Filetype markdown setlocal ts=2 sw=2 expandtab
+autocmd Filetype mdx setlocal ts=2 sw=2 expandtab
+autocmd Filetype zig setlocal ts=4 sw=4 expandtab
 set noerrorbells
 set novisualbell
 set t_vb=
@@ -125,32 +127,13 @@ au BufRead,BufNewFile *.star setfiletype starlark
 au BufRead,BufNewFile *.mdx setfiletype mdx
 
 " lsp autocomplete
-" https://github.com/ThePrimeagen/.dotfiles/blob/master/nvim/.config/nvim/plugin/lsp.vim
+" <C-X><C-O> in insert mode, <C-N> and <C-P> to navigate.
 set completeopt=menuone,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+let g:completion_enable_auto_popup = 1
 
-let g:compe = {}
-let g:compe.enabled = v:true
-let g:compe.autocomplete = v:true
-let g:compe.debug = v:false
-let g:compe.min_length = 1
-let g:compe.preselect = 'enable'
-let g:compe.throttle_time = 80
-let g:compe.source_timeout = 200
-let g:compe.incomplete_delay = 400
-let g:compe.max_abbr_width = 100
-let g:compe.max_kind_width = 100
-let g:compe.max_menu_width = 100
-let g:compe.documentation = v:true
-
-let g:compe.source = {}
-let g:compe.source.path = v:true
-let g:compe.source.buffer = v:true
-let g:compe.source.calc = v:true
-let g:compe.source.nvim_lsp = v:true
-let g:compe.source.nvim_lua = v:true
-let g:compe.source.vsnip = v:true
-
+" lsp formatting
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 3000)
+autocmd BufWritePre *.zig lua vim.lsp.buf.formatting_sync(nil, 3000)
 
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
