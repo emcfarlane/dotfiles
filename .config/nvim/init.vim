@@ -34,7 +34,7 @@ set tabpagemax=50
 set viminfo^=!
 set sessionoptions-=options
 set number relativenumber " relative line numbers
-autocmd Filetype javascript,javascriptreact,typescriptreact setlocal ts=2 sts=2 sw=2 expandtab
+autocmd Filetype javascript,javascriptreact,typescript,typescriptreact setlocal ts=2 sts=2 sw=2 expandtab
 autocmd Filetype json setlocal ts=2 sts=2 sw=2
 autocmd Filetype css setlocal ts=4 sts=4 sw=4 expandtab
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
@@ -117,7 +117,7 @@ augroup autoformat_settings
   autocmd FileType java AutoFormatBuffer google-java-format
   autocmd FileType python AutoFormatBuffer yapf
   autocmd FileType rust AutoFormatBuffer rustfmt
-  autocmd FileType vue,javascript,typescriptreact AutoFormatBuffer prettier
+  autocmd FileType vue,javascript,typescript,typescriptreact AutoFormatBuffer prettier
   autocmd FileType starlark AutoFormatBuffer buildifier
 augroup END
 
