@@ -133,7 +133,7 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 let g:completion_enable_auto_popup = 1
 
 " lsp formatting
-autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 3000)
-autocmd BufWritePre *.zig lua vim.lsp.buf.formatting_sync(nil, 3000)
+autocmd BufWritePre *.go lua vim.lsp.buf.format(nil, 3000)
+autocmd BufWritePre *.zig lua vim.lsp.buf.format(nil, 3000)
 
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
