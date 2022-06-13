@@ -49,6 +49,7 @@ autocmd Filetype proto setlocal ts=2 sw=2 expandtab
 autocmd Filetype markdown setlocal ts=2 sw=2 expandtab
 autocmd Filetype mdx setlocal ts=2 sw=2 expandtab
 autocmd Filetype zig setlocal ts=4 sw=4 expandtab
+autocmd Filetype sql setlocal ts=4 sw=4 expandtab
 set noerrorbells
 set novisualbell
 set t_vb=
