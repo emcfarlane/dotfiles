@@ -99,6 +99,8 @@ vnoremap § <esc>
 :tnoremap <Esc> <C-\><C-n>
 ":set shell=/usr/local/bin/zsh
 if has('nvim')
+  " https://github.com/mhinz/neovim-remote
+  " Whilst in nvim's terminal, connect to the current instance.
   let $GIT_EDITOR = 'nvr -cc split --remote-wait'
 endif
 autocmd FileType gitcommit set bufhidden=delete
