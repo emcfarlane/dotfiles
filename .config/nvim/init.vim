@@ -63,6 +63,11 @@ set shortmess+=c   " Shut off completion messages
 set belloff+=ctrlg " If Vim beeps during completion
 set rtp+=~/bin
 
+if exists('g:vscode')
+    " VSCode extension
+    finish
+end
+
 lua require("myluamodule")
 
 " fzf
@@ -114,7 +119,7 @@ augroup autoformat_settings
   autocmd FileType bzl AutoFormatBuffer buildifier
   autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
   autocmd FileType dart AutoFormatBuffer dartfmt
-  " autocmd FileType go AutoFormatBuffer gofmt
+  "autocmd FileType go AutoFormatBuffer gofmt
   autocmd FileType gn AutoFormatBuffer gn
   autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer prettier
   autocmd FileType java AutoFormatBuffer google-java-format
