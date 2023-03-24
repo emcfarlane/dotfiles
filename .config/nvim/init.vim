@@ -126,7 +126,7 @@ augroup autoformat_settings
   autocmd FileType python AutoFormatBuffer yapf
   autocmd FileType rust AutoFormatBuffer rustfmt
   autocmd FileType vue,javascript,typescript,typescriptreact AutoFormatBuffer prettier
-  autocmd FileType starlark AutoFormatBuffer buildifier
+  autocmd FileType starlark AutoFormatBuffer yapf
 augroup END
 
 " Set the filetype based on the file's extension, but only if
