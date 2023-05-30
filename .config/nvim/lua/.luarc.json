@@ -1,0 +1,30 @@
+{
+    "workspace.library": [
+        "/Users/edwardmcfarlane/.config/nvim",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/lazy.nvim",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/plenary.nvim",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/telescope.nvim",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/copilot.vim",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/vim-rhubarb",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/friendly-snippets",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/cmp-nvim-lsp",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/cmp_luasnip",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/LuaSnip",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/nvim-cmp",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/lualine.nvim",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/telescope-fzf-native.nvim",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/neodev.nvim",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/fidget.nvim",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/mason-lspconfig.nvim",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/mason.nvim",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/nvim-lspconfig",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/vim-fugitive",
+        "/opt/homebrew/Cellar/neovim/0.8.3/share/nvim/runtime",
+        "/opt/homebrew/Cellar/neovim/0.8.3/share/nvim/runtime/pack/dist/opt/matchit",
+        "/opt/homebrew/Cellar/neovim/0.8.3/lib/nvim",
+        "/Users/edwardmcfarlane/.local/state/nvim/lazy/readme",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/cmp-nvim-lsp/after",
+        "/Users/edwardmcfarlane/.local/share/nvim/lazy/cmp_luasnip/after",
+        "${3rd}/luassert/library"
+    ]
+}
