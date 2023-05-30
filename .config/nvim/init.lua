@@ -99,10 +99,10 @@ require("lazy").setup({
 	},
 
 	-- Plugins
-	require 'lua.autoformat',
+	require 'autoformat',
 }, {})
 
-vim.cmd('colorscheme kanagawa-wave')
+vim.cmd('colorscheme kanagawa-dragon')
 
 -- Make line numbers default
 vim.wo.number = true
@@ -233,9 +233,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		nmap('<leader>wl', function()
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end, '[W]orkspace [L]ist Folders')
-		nmap('<leader>f', function()
+		nmap('<leader>ff', function()
 			vim.lsp.buf.format { async = true }
-		end, '[F]ormat')
+		end, '[F]ormat [F]ile')
 	end
 })
 
