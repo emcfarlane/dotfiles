@@ -3,7 +3,6 @@
 -- based on: https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-
 vim.g.copilot_filetypes = { VimspectorPrompt = false }
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -101,6 +100,7 @@ require("lazy").setup({
 }, {})
 
 vim.cmd('colorscheme kanagawa-dragon')
+vim.o.colorcolumn = '80'
 
 -- Make line numbers default
 vim.wo.number = true
@@ -343,24 +343,6 @@ cmp.setup {
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
 		},
-		['<Tab>'] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_locally_jumpable() then
-				luasnip.expand_or_jump()
-			else
-				fallback()
-			end
-		end, { 'i', 's' }),
-		['<S-Tab>'] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.locally_jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, { 'i', 's' }),
 	},
 	sources = {
 		{ name = 'nvim_lsp' },
