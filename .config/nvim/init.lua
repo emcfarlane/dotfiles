@@ -83,6 +83,16 @@ require("lazy").setup({
 				component_separators = '|',
 				section_separators = '',
 			},
+			sections = {
+				lualine_a = { 'mode' },
+				lualine_b = { 'branch', 'diff', 'diagnostics' },
+				lualine_c = {
+					{ 'filename', path = 1 },
+				},
+				lualine_x = { 'encoding', 'fileformat', 'filetype' },
+				lualine_y = { 'progress' },
+				lualine_z = { 'location' }
+			},
 		},
 	},
 
@@ -169,9 +179,15 @@ require('telescope').setup {
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
+
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader><space>', function()
+	require('telescope.builtin').buffers({
+		sort_mru = true,
+		ignore_current_buffer = true
+	})
+end, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
 	-- You can pass additional configuration to telescope to change theme, layout, etc.
 	require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -245,7 +261,8 @@ lspconfig.tsserver.setup {
 	}
 }
 lspconfig.clangd.setup {
-	root_dir = function() return vim.loop.cwd() end
+	root_dir = function() return vim.loop.cwd() end,
+	filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
 }
 
 lspconfig.jedi_language_server.setup {
@@ -415,3 +432,16 @@ require('nvim-treesitter.configs').setup {
 		},
 	},
 }
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "html",
+	command = "setlocal shiftwidth=2 tabstop=2 expandtab"
+})
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "typescript",
+	command = "setlocal shiftwidth=2 tabstop=2 expandtab"
+})
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "proto",
+	command = "setlocal shiftwidth=2 tabstop=2 expandtab"
+})
