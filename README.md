@@ -2,15 +2,12 @@
 
 `git clone --recurse-submodules git@github.com:emcfarlane/dotfiles.git`
 
-
 Symlink files into place `ln -s ~/src/github.com/emcfarlane/dotfiles/.config/nvim ~/.config/nvim`.
 
-## Submodules
-
-Update a submodule, cd into directory then:
-```
-git fetch
-git merge origin/master
-```
-
-### tmux 
+- [tmux](https://github.com/tmux/tmux/wiki)
+- [powerlevel10k](https://github.com/romkatv/powerlevel10k)
+- [neovim](https://neovim.io)
+- [lazy.nvim](https://github.com/folke/lazy.nvim)
+- [kickstarter.nvim](https://github.com/nvim-lua/kickstart.nvim)
+- [fzf](https://github.com/junegunn/fzf)
+- [fzf.nvim](https://github.com/junegunn/fzf.vim)
