@@ -22,8 +22,8 @@ require("lazy").setup({
 	-- Git related plugins
 	'tpope/vim-fugitive',
 	'tpope/vim-rhubarb',
+	'tpope/vim-sleuth', -- Automatically set the 'shiftwidth' and 'expandtab' options based on the current file
 	'github/copilot.vim',
-	'rebelot/kanagawa.nvim',
 
 	-- NOTE: This is where your plugins related to LSP can be installed.
 	--  The configuration is done below. Search for lspconfig to find it below.
@@ -50,6 +50,7 @@ require("lazy").setup({
 
 			-- Adds LSP completion capabilities
 			'hrsh7th/cmp-nvim-lsp',
+			'hrsh7th/cmp-path',
 
 			-- Adds a number of user-friendly snippets
 			'rafamadriz/friendly-snippets',
@@ -57,19 +58,24 @@ require("lazy").setup({
 	},
 
 	-- Fuzzy Finder (files, lsp, etc)
-	{ 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
-
-	-- Fuzzy Finder Algorithm which requires local dependencies to be built.
-	-- Only load if `make` is available. Make sure you have the system
-	-- requirements installed.
 	{
-		'nvim-telescope/telescope-fzf-native.nvim',
-		-- NOTE: If you are having trouble with this installation,
-		--       refer to the README for telescope-fzf-native for more instructions.
-		build = 'make',
-		cond = function()
-			return vim.fn.executable 'make' == 1
-		end,
+		'nvim-telescope/telescope.nvim',
+		branch = '0.1.x',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			-- Fuzzy Finder Algorithm which requires local dependencies to be built.
+			-- Only load if `make` is available. Make sure you have the system
+			-- requirements installed.
+			{
+				'nvim-telescope/telescope-fzf-native.nvim',
+				-- NOTE: If you are having trouble with this installation,
+				--       refer to the README for telescope-fzf-native for more instructions.
+				build = 'make',
+				cond = function()
+					return vim.fn.executable 'make' == 1
+				end,
+			},
+		},
 	},
 
 	{
@@ -107,10 +113,11 @@ require("lazy").setup({
 
 	-- Plugins
 	require 'autoformat',
+	require 'colourscheme',
 }, {})
 
-vim.cmd('colorscheme kanagawa-dragon')
 vim.o.colorcolumn = '80'
+vim.o.tabstop = 4
 
 -- Make line numbers default
 vim.wo.number = true
@@ -144,9 +151,8 @@ vim.o.timeoutlen = 300
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
--- NOTE: You should make sure your terminal supports this
-vim.o.termguicolors = true
-
+-- Set termguicolors, exclude Apple_Terminal
+vim.o.termguicolors = os.getenv('TERM_PROGRAM') ~= 'Apple_Terminal'
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -247,9 +253,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		nmap('<leader>wl', function()
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end, '[W]orkspace [L]ist Folders')
-		nmap('<leader>ff', function()
-			vim.lsp.buf.format { async = true }
-		end, '[F]ormat [F]ile')
+		-- Create a command `:Format` local to the LSP buffer
+		vim.api.nvim_buf_create_user_command(ev.buf, 'Format', function(_)
+			vim.lsp.buf.format()
+		end, { desc = 'Format current buffer with LSP' })
 	end
 })
 
@@ -288,7 +295,7 @@ lspconfig.yamlls.setup {
 	}
 }
 lspconfig.gopls.setup {
-	cmd = { "gopls", "serve" },
+	cmd = { "gopls", "-remote=auto", "-logfile=auto", "-debug=:0", "-remote.debug=:0", "-rpc.trace" },
 	settings = {
 		gopls = {
 			analyses = {
@@ -375,7 +382,12 @@ require('nvim-treesitter.configs').setup {
 
 	-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 	auto_install = false,
-
+	-- Install languages synchronously (only applied to `ensure_installed`)
+	sync_install = false,
+	-- List of parsers to ignore installing
+	ignore_install = {},
+	-- You can specify additional Treesitter modules here: -- For example: -- playground = {--enable = true,-- },
+	modules = {},
 	highlight = { enable = true },
 	indent = { enable = true, disable = { 'python' } },
 	incremental_selection = {
