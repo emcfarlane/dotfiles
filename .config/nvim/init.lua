@@ -20,13 +20,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	-- Git related plugins
-	'tpope/vim-fugitive',
-	'tpope/vim-rhubarb',
+	'tpope/vim-fugitive', -- Git commands in nvim
+	'tpope/vim-rhubarb', -- Enables `:Gbrowse` to open the current file on GitHub
 	'tpope/vim-sleuth', -- Automatically set the 'shiftwidth' and 'expandtab' options based on the current file
 	'github/copilot.vim',
-
-	-- NOTE: This is where your plugins related to LSP can be installed.
-	--  The configuration is done below. Search for lspconfig to find it below.
 	{
 		-- LSP Configuration & Plugins
 		'neovim/nvim-lspconfig',
@@ -39,7 +36,6 @@ require("lazy").setup({
 			'folke/neodev.nvim',
 		},
 	},
-
 	{
 		-- Autocompletion
 		'hrsh7th/nvim-cmp',
@@ -56,9 +52,8 @@ require("lazy").setup({
 			'rafamadriz/friendly-snippets',
 		},
 	},
-
-	-- Fuzzy Finder (files, lsp, etc)
 	{
+		-- Fuzzy Finder (files, lsp, etc)
 		'nvim-telescope/telescope.nvim',
 		branch = '0.1.x',
 		dependencies = {
@@ -77,7 +72,6 @@ require("lazy").setup({
 			},
 		},
 	},
-
 	{
 		-- Set lualine as statusline
 		'nvim-lualine/lualine.nvim',
@@ -85,7 +79,7 @@ require("lazy").setup({
 		opts = {
 			options = {
 				icons_enabled = false,
-				theme = 'onedark',
+				--theme = 'onedark',
 				component_separators = '|',
 				section_separators = '',
 			},
@@ -101,7 +95,6 @@ require("lazy").setup({
 			},
 		},
 	},
-
 	{
 		-- Highlight, edit, and navigate code
 		'nvim-treesitter/nvim-treesitter',
@@ -110,10 +103,11 @@ require("lazy").setup({
 		},
 		build = ':TSUpdate',
 	},
-
 	-- Plugins
 	require 'autoformat',
 	require 'colourscheme',
+	require 'hooks',
+	require 'debugger',
 }, {})
 
 vim.o.colorcolumn = '80'
@@ -179,6 +173,7 @@ require('telescope').setup {
 				['<C-d>'] = false,
 			},
 		},
+		path_display = { "truncate" }
 	},
 }
 
@@ -197,7 +192,6 @@ end, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
 	-- You can pass additional configuration to telescope to change theme, layout, etc.
 	require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-		winblend = 10,
 		previewer = false,
 	})
 end, { desc = '[/] Fuzzily search in current buffer' })
@@ -244,7 +238,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 		-- See `:help K` for why this keymap
 		nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-		nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+		nmap('<leader>k', vim.lsp.buf.signature_help, 'Signature Documentation')
 
 		-- Lesser used LSP functionality
 		nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
