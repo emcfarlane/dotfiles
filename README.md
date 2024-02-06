@@ -10,3 +10,5 @@ Symlink files into place `ln -s ~/src/github.com/emcfarlane/dotfiles/.config/nvi
 - [kickstarter.nvim](https://github.com/nvim-lua/kickstart.nvim)
 - [fzf](https://github.com/junegunn/fzf)
 - [fzf.nvim](https://github.com/junegunn/fzf.vim)
+- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+- [zsh-history-substring-search](https://github.com/zsh-users/zsh-history-substring-search)
