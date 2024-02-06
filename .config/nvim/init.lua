@@ -103,11 +103,13 @@ require("lazy").setup({
 		},
 		build = ':TSUpdate',
 	},
+	-- Debug
+	'mfussenegger/nvim-dap',
+	'leoluz/nvim-dap-go',
 	-- Plugins
 	require 'autoformat',
 	require 'colourscheme',
 	require 'hooks',
-	require 'debugger',
 }, {})
 
 vim.o.colorcolumn = '80'
@@ -438,6 +440,12 @@ require('nvim-treesitter.configs').setup {
 		},
 	},
 }
+
+-- [[ Configure Debugger ]]
+-- See `:help dap.txt`
+-- See `:help dap-configuration`
+--local dap = require('dap')
+require('dap-go').setup()
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "html",
