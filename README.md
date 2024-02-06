@@ -5,7 +5,6 @@
 Symlink files into place `ln -s ~/src/github.com/emcfarlane/dotfiles/.config/nvim ~/.config/nvim`.
 
 - [tmux](https://github.com/tmux/tmux/wiki)
-- [powerlevel10k](https://github.com/romkatv/powerlevel10k)
 - [neovim](https://neovim.io)
 - [lazy.nvim](https://github.com/folke/lazy.nvim)
 - [kickstarter.nvim](https://github.com/nvim-lua/kickstart.nvim)
