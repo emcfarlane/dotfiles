@@ -79,7 +79,7 @@ require("lazy").setup({
 		opts = {
 			options = {
 				icons_enabled = false,
-				--theme = 'onedark',
+				theme = 'onedark',
 				component_separators = '|',
 				section_separators = '',
 			},
@@ -106,6 +106,7 @@ require("lazy").setup({
 	-- Debug
 	'mfussenegger/nvim-dap',
 	'leoluz/nvim-dap-go',
+	'rcarriga/nvim-dap-ui',
 	-- Plugins
 	require 'autoformat',
 	require 'colourscheme',
@@ -339,7 +340,6 @@ lspconfig.lua_ls.setup {
 }
 lspconfig.bufls.setup {}
 
-
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
 local cmp = require 'cmp'
@@ -444,9 +444,32 @@ require('nvim-treesitter.configs').setup {
 -- [[ Configure Debugger ]]
 -- See `:help dap.txt`
 -- See `:help dap-configuration`
---local dap = require('dap')
-require('dap-go').setup()
+local dap, dapui, dapgo = require("dap"), require("dapui"), require("dap-go")
+dap.listeners.before.attach["dapui_config"] = dapui.open
+dap.listeners.before.launch["dapui_config"] = dapui.open
+dap.listeners.before.event_terminated["dapui_config"] = dapui.close
+dap.listeners.before.event_exited["dapui_config"] = dapui.close
+vim.keymap.set('n', '<leader>dbc', dap.continue)
+vim.keymap.set('n', '<leader>dbs', dap.step_over)
+vim.keymap.set('n', '<leader>dbi', require 'dap'.step_into)
+vim.keymap.set('n', '<leader>dbo', require 'dap'.step_out)
+vim.keymap.set('n', '<leader>dbb', require 'dap'.toggle_breakpoint)
+dapui.setup()
+dapgo.setup()
 
+function DebugGoTest(testpath, testname)
+	dap.run({
+		type = "go",
+		name = testname,
+		request = "launch",
+		mode = "test",
+		program = testpath,
+		args = { "-test.run", "^" .. testname .. "$" },
+		buildFlags = "",
+	})
+end
+
+-- [[ Configure Filetype ]]
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "html",
 	command = "setlocal shiftwidth=2 tabstop=2 expandtab"
