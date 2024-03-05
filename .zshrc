@@ -10,7 +10,7 @@ export RPROMPT=$'$(__git_ps1 "%s")'
 
 COLOR_DEF=$'%f'
 COLOR_USR=$'%F{243}'
-COLOR_DIR=$'%F{197}'
+COLOR_DIR=$'%F{74}'
 setopt PROMPT_SUBST
 export PROMPT='${COLOR_USR}%n ${COLOR_DIR}%~${COLOR_DEF} %# '
 
@@ -21,6 +21,9 @@ export SAVEHIST=10000 # Maximum events in history file
 
 export EDITOR="nvim"
 export VISUAL="nvim"
+
+# ignore <C-d> (EOF), force logout with `exit`
+setopt ignoreeof
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
 source ~/src/github.com/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -42,4 +45,5 @@ export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
 alias l='ls -lFh'          #size,show type,human readable
 alias -g ...='../..'
 alias -g ....='../../..'
+alias vim='nvim'
 
