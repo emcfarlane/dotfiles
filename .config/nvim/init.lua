@@ -37,6 +37,9 @@ vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
+-- Set netrw default list option to tree
+vim.g.netrw_liststyle = 3
+
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
@@ -106,6 +109,7 @@ require("lazy").setup({
 	'tpope/vim-fugitive', -- Git commands in nvim
 	'tpope/vim-rhubarb', -- Enables `:Gbrowse` to open the current file on GitHub
 	'tpope/vim-sleuth', -- Automatically set the 'shiftwidth' and 'expandtab' options based on the current file
+	'tpope/vim-vinegar', -- Enhances the netrw file browser
 	'github/copilot.vim',
 	{                  -- Useful plugin to show you pending keybinds.
 		'folke/which-key.nvim',
@@ -381,6 +385,12 @@ require("lazy").setup({
 						},
 					},
 					path_display = { "truncate" }
+				},
+				pickers = {
+					buffers = {
+						ignore_current_buffer = true,
+						sort_mru = true,
+					},
 				},
 				extensions = {
 					['ui-select'] = {
