@@ -37,9 +37,6 @@ vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
--- Set netrw default list option to tree
-vim.g.netrw_liststyle = 3
-
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
@@ -109,7 +106,8 @@ require("lazy").setup({
 	'tpope/vim-fugitive', -- Git commands in nvim
 	'tpope/vim-rhubarb', -- Enables `:Gbrowse` to open the current file on GitHub
 	'tpope/vim-sleuth', -- Automatically set the 'shiftwidth' and 'expandtab' options based on the current file
-	'tpope/vim-vinegar', -- Enhances the netrw file browser
+	'tpope/vim-surround', -- Surround text objects with symbols
+	'tpope/vim-repeat', -- Enable repeating of plugin commands with `.`
 	'github/copilot.vim',
 	{                  -- Useful plugin to show you pending keybinds.
 		'folke/which-key.nvim',
@@ -125,6 +123,23 @@ require("lazy").setup({
 				['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
 				['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
 			}
+		end,
+	},
+	{
+		"stevearc/oil.nvim",
+		config = function()
+			require("oil").setup {
+				default_file_explorer = true,
+				columns = { "icon" },
+				use_default_keymaps = true,
+				view_options = {
+					show_hidden = true,
+				},
+			}
+			-- Open parent directory in current window
+			vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+			-- Open parent directory in floating window
+			vim.keymap.set("n", "<space>-", require("oil").toggle_float)
 		end,
 	},
 	{
@@ -160,7 +175,8 @@ require("lazy").setup({
 					nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 					nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
 					nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-					nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+					nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols,
+						'[D]ocument [S]ymbols')
 					nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
 						'[W]orkspace [S]ymbols')
 					nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
@@ -173,7 +189,8 @@ require("lazy").setup({
 					-- Lesser used LSP functionality
 					nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 					nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-					nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+					nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder,
+						'[W]orkspace [R]emove Folder')
 					nmap('<leader>wl', function()
 						print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 					end, '[W]orkspace [L]ist Folders')
@@ -189,7 +206,8 @@ require("lazy").setup({
 			--  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
 			--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+			capabilities = vim.tbl_deep_extend('force', capabilities,
+				require('cmp_nvim_lsp').default_capabilities())
 
 
 			-- Configure LSP
@@ -413,7 +431,8 @@ require("lazy").setup({
 			vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
 			vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
 			vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-			vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+			vim.keymap.set('n', '<leader>s.', builtin.oldfiles,
+				{ desc = '[S]earch Recent Files ("." for repeat)' })
 			vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
 			-- Slightly advanced example of overriding default behavior and theme
