@@ -6,7 +6,6 @@ vim.g.maplocalleader = ' '
 vim.g.copilot_filetypes = { VimspectorPrompt = false }
 
 vim.o.colorcolumn = '80'
-vim.o.tabstop = 4
 
 -- Make line numbers default
 vim.wo.number = true
@@ -100,6 +99,19 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "proto",
 	command = "setlocal shiftwidth=2 tabstop=2 expandtab"
 })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "sql",
+	command = "setlocal shiftwidth=2 tabstop=2 expandtab"
+})
+
+-- Fix for Browse
+vim.api.nvim_create_user_command(
+	'Browse',
+	function(opts)
+		vim.fn.system { 'open', opts.fargs[1] }
+	end,
+	{ nargs = 1 }
+)
 
 require("lazy").setup({
 	-- Git related plugins
@@ -109,19 +121,30 @@ require("lazy").setup({
 	'tpope/vim-surround', -- Surround text objects with symbols
 	'tpope/vim-repeat', -- Enable repeating of plugin commands with `.`
 	'github/copilot.vim',
-	{                  -- Useful plugin to show you pending keybinds.
+	{
+		-- Useful plugin to show you pending keybinds.
 		'folke/which-key.nvim',
 		event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+		keys = {
+			{
+				"<leader>?",
+				function()
+					require("which-key").show({ global = false })
+				end,
+				desc = "Buffer Local Keymaps (which-key)",
+			},
+		},
 		config = function() -- This is the function that runs, AFTER loading
 			require('which-key').setup()
-
 			-- Document existing key chains
-			require('which-key').register {
-				['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-				['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-				['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-				['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-				['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+			require('which-key').add {
+				{ '<leader>c', group = '[C]ode' },
+				{ '<leader>d', group = '[D]ocument' },
+				{ '<leader>r', group = '[R]ename' },
+				{ '<leader>s', group = '[S]earch' },
+				{ '<leader>w', group = '[W]orkspace' },
+				{ '<leader>t', group = '[T]oggle' },
+				{ '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
 			}
 		end,
 	},
@@ -297,7 +320,8 @@ require("lazy").setup({
 			lspconfig.bufls.setup {}
 		end,
 	},
-	{ -- Autoformat
+	{
+		-- Autoformat
 		'stevearc/conform.nvim',
 		opts = {
 			notify_on_error = false,
@@ -312,7 +336,7 @@ require("lazy").setup({
 				--
 				-- You can use a sub-list to tell conform to run *until* a formatter
 				-- is found.
-				-- javascript = { { "prettierd", "prettier" } },
+				javascript = { { "prettierd", "prettier" } },
 			},
 		},
 	},
@@ -460,7 +484,7 @@ require("lazy").setup({
 	},
 	{
 		-- Set lualine as statusline
-		'nvim-lualine/lualine.nvim',
+		'vim-lualine/lualine.nvim',
 		-- See `:help lualine.txt`
 		opts = {
 			options = {
@@ -492,7 +516,8 @@ require("lazy").setup({
 			-- See `:help nvim-treesitter`
 			require('nvim-treesitter.configs').setup {
 				-- Add languages to be installed here that you want installed for treesitter
-				ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'zig' },
+				ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim',
+					'zig' },
 
 				-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 				auto_install = true,
@@ -560,8 +585,16 @@ require("lazy").setup({
 			}
 		end,
 	},
+	{
+		'plan9-for-vimspace/acme-colors',
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.o.background = 'light' -- or 'dark'
+			vim.cmd.colorscheme 'acme'
+		end,
+	},
 	-- Plugins
-	require 'colourscheme',
 	require 'hooks',
 	require 'dapper',
 }, {})
