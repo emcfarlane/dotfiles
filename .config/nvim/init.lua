@@ -474,7 +474,7 @@ require("lazy").setup({
 	},
 	{
 		-- Set lualine as statusline
-		'vim-lualine/lualine.nvim',
+		'nvim-lualine/lualine.nvim',
 		-- See `:help lualine.txt`
 		opts = {
 			options = {
