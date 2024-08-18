@@ -6,12 +6,11 @@ GIT_PS1_SHOWUPSTREAM="auto"
 GIT_PS1_SHOWCOLORHINTS="true"
 setopt prompt_subst
 . ~/src/github.com/git/git/contrib/completion/git-prompt.sh
-export RPROMPT=$'$(__git_ps1 "%s")'
 
 COLOR_DEF=$'%f'
 COLOR_DIR=$'%F{243}'
 setopt PROMPT_SUBST
-export PROMPT='%B${COLOR_DIR}%~${COLOR_DEF} %#%b '
+export PROMPT='%B${COLOR_DIR}%~${COLOR_DEF}$(__git_ps1 "(%s)") %#%b '
 
 # man zshmisc
 export HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
@@ -76,4 +75,3 @@ alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
 alias vim='nvim'
-
