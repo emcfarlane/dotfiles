@@ -23,15 +23,6 @@ export VISUAL="nvim"
 # ignore <C-d> (EOF), force logout with `exit`
 setopt ignoreeof
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
-source ~/src/github.com/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-source ~/src/github.com/zsh-users/zsh-history-substring-search/zsh-history-substring-search.zsh
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-
 # vi mode on ESC, edit command line with `v` in normal mode
 bindkey -v
 export KEYTIMEOUT=1
@@ -61,6 +52,13 @@ bindkey -M vicmd cs change-surround
 bindkey -M vicmd ds delete-surround
 bindkey -M vicmd ys add-surround
 bindkey -M visual S add-surround
+
+# zsh-autosuggestions, after vi-mode to avoid conflicts
+source ~/src/github.com/zsh-users/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 # completions
 # https://zsh.sourceforge.io/Doc/Release/Completion-System.html#Use-of-compinit
