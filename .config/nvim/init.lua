@@ -123,15 +123,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	command = "setlocal shiftwidth=4 tabstop=4 expandtab"
 })
 
--- Fix for Browse
-vim.api.nvim_create_user_command(
-	'Browse',
-	function(opts)
-		vim.fn.system { 'open', opts.fargs[1] }
-	end,
-	{ nargs = 1 }
-)
-
 -- Quickfix (c for quickfix...)
 vim.keymap.set("n", "<M-j>", "<CMD>cnext<CR>", { desc = "Next quickfix item" })
 vim.keymap.set("n", "<M-k>", "<CMD>cprev<CR>", { desc = "Previous quickfix item" })
