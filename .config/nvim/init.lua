@@ -4,8 +4,13 @@
 vim.g.mapleader = ' ' -- Set mapleader before loading any plugins
 vim.g.maplocalleader = ' '
 vim.g.copilot_filetypes = { VimspectorPrompt = false }
-
 vim.o.colorcolumn = '80'
+
+-- Add cwd titles to ghostty windows
+if vim.fn.getenv("TERM_PROGRAM") == "ghostty" then
+	vim.opt.title = true
+	vim.opt.titlestring = "%{fnamemodify(getcwd(), ':t')}"
+end
 
 -- Make line numbers default
 vim.wo.number = true
@@ -103,6 +108,20 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "sql",
 	command = "setlocal shiftwidth=2 tabstop=2 expandtab"
 })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "template",
+	command = "setlocal shiftwidth=2 tabstop=2 expandtab"
+})
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+	pattern = "*.wgsl",
+	callback = function()
+		vim.bo.filetype = "wgsl"
+	end,
+})
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "wgsl",
+	command = "setlocal shiftwidth=4 tabstop=4 expandtab"
+})
 
 -- Fix for Browse
 vim.api.nvim_create_user_command(
@@ -112,6 +131,26 @@ vim.api.nvim_create_user_command(
 	end,
 	{ nargs = 1 }
 )
+
+-- Quickfix (c for quickfix...)
+vim.keymap.set("n", "<M-j>", "<CMD>cnext<CR>", { desc = "Next quickfix item" })
+vim.keymap.set("n", "<M-k>", "<CMD>cprev<CR>", { desc = "Previous quickfix item" })
+
+-- Terminal
+vim.api.nvim_create_autocmd("TermOpen", {
+	group = vim.api.nvim_create_augroup("CustomTermOpen", { clear = true }),
+	callback = function()
+		vim.opt.number = false
+		vim.opt.relativenumber = false
+	end,
+})
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>")
+vim.keymap.set("n", "<space>st", function()
+	vim.cmd.vnew()
+	vim.cmd.term()
+	vim.cmd.wincmd("J")
+	vim.api.nvim_win_set_height(0, 15)
+end)
 
 require("lazy").setup({
 	-- Git related plugins
@@ -124,10 +163,7 @@ require("lazy").setup({
 	{
 		-- Useful plugin to show you pending keybinds.
 		'folke/which-key.nvim',
-		event = 'VeryLazy',
-		opts = {
-			-- Default config is empty
-		},
+		event = 'VimEnter', -- Sets the loading event to 'VimEnter'
 		keys = {
 			{
 				"<leader>?",
@@ -137,6 +173,19 @@ require("lazy").setup({
 				desc = "Buffer Local Keymaps (which-key)",
 			},
 		},
+		config = function() -- This is the function that runs, AFTER loading
+			require('which-key').setup()
+			-- Document existing key chains
+			require('which-key').add {
+				{ '<leader>c', group = '[C]ode' },
+				{ '<leader>d', group = '[D]ocument' },
+				{ '<leader>r', group = '[R]ename' },
+				{ '<leader>s', group = '[S]earch' },
+				{ '<leader>w', group = '[W]orkspace' },
+				{ '<leader>t', group = '[T]oggle' },
+				{ '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+			}
+		end,
 	},
 	{
 		"stevearc/oil.nvim",
@@ -151,8 +200,6 @@ require("lazy").setup({
 			}
 			-- Open parent directory in current window
 			vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-			-- Open parent directory in floating window
-			vim.keymap.set("n", "<space>-", require("oil").toggle_float)
 		end,
 	},
 	{
@@ -228,7 +275,7 @@ require("lazy").setup({
 
 			local lspconfig = require('lspconfig')
 
-			lspconfig.tsserver.setup {
+			lspconfig.ts_ls.setup {
 				flags = {
 					debounce_text_changes = 150,
 				}
@@ -237,7 +284,7 @@ require("lazy").setup({
 				root_dir = function() return vim.loop.cwd() end,
 				filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
 			}
-
+			lspconfig.html.setup {}
 			lspconfig.jedi_language_server.setup {
 				flags = {
 					debounce_text_changes = 150,
@@ -307,7 +354,7 @@ require("lazy").setup({
 					},
 				},
 			}
-			lspconfig.bufls.setup {}
+			lspconfig.wgsl_analyzer.setup({})
 		end,
 	},
 	{
@@ -326,7 +373,9 @@ require("lazy").setup({
 				--
 				-- You can use a sub-list to tell conform to run *until* a formatter
 				-- is found.
-				javascript = { { "prettierd", "prettier" } },
+				javascript = { "prettierd", "prettier" },
+				html = { "prettierd", "prettier" },
+				template = { "prettierd", "prettier" },
 			},
 		},
 	},
@@ -582,6 +631,7 @@ require("lazy").setup({
 		config = function()
 			vim.o.background = 'light' -- or 'dark'
 			vim.cmd.colorscheme 'acme'
+			vim.api.nvim_set_hl(0, "NormalFloat", { ctermbg = 195, bg = "#E2F1F8" })
 		end,
 	},
 	-- Plugins
