@@ -1,0 +1,78 @@
+{
+  "plugins": {
+    "blink.cmp": {
+      "rev": "2408f14",
+      "src": "https://github.com/saghen/blink.cmp"
+    },
+    "conform.nvim": {
+      "rev": "9fd3d5e",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
+    "copilot.vim": {
+      "rev": "da369d9",
+      "src": "https://github.com/github/copilot.vim"
+    },
+    "lualine.nvim": {
+      "rev": "3946f01",
+      "src": "https://github.com/nvim-lualine/lualine.nvim"
+    },
+    "nvim-lspconfig": {
+      "rev": "a89bfcf",
+      "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-treesitter": {
+      "rev": "64f4755b",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'main'"
+    },
+    "oil.nvim": {
+      "rev": "7e1cd77",
+      "src": "https://github.com/stevearc/oil.nvim"
+    },
+    "plenary.nvim": {
+      "rev": "b9fd522",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "telescope-ui-select.nvim": {
+      "rev": "6e51d7d",
+      "src": "https://github.com/nvim-telescope/telescope-ui-select.nvim"
+    },
+    "telescope.nvim": {
+      "rev": "a0bbec2",
+      "src": "https://github.com/nvim-telescope/telescope.nvim",
+      "version": "'0.1.8'"
+    },
+    "vim-dadbod": {
+      "rev": "e95afed",
+      "src": "https://github.com/tpope/vim-dadbod"
+    },
+    "vim-dadbod-completion": {
+      "rev": "a8dac0b",
+      "src": "https://github.com/kristijanhusak/vim-dadbod-completion"
+    },
+    "vim-dadbod-ui": {
+      "rev": "236179f",
+      "src": "https://github.com/kristijanhusak/vim-dadbod-ui"
+    },
+    "vim-fugitive": {
+      "rev": "61b51c0",
+      "src": "https://github.com/tpope/vim-fugitive"
+    },
+    "vim-repeat": {
+      "rev": "6584602",
+      "src": "https://github.com/tpope/vim-repeat"
+    },
+    "vim-rhubarb": {
+      "rev": "5496d7c",
+      "src": "https://github.com/tpope/vim-rhubarb"
+    },
+    "vim-sleuth": {
+      "rev": "be69bff",
+      "src": "https://github.com/tpope/vim-sleuth"
+    },
+    "vim-surround": {
+      "rev": "3d188ed",
+      "src": "https://github.com/tpope/vim-surround"
+    }
+  }
+}
