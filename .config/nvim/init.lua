@@ -259,6 +259,8 @@ require("lualine").setup({
 })
 
 local map = vim.keymap.set
+map({ "n" }, "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+map({ "n", "v", "x" }, "<leader>lf", vim.lsp.buf.format, { desc = "Format current buffer" })
 
 local builtin = require("telescope.builtin")
 local function find_files()  builtin.find_files({ no_ignore = true }) end
