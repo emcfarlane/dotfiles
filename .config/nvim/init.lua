@@ -11,13 +11,13 @@ vim.o.showtabline = 2
 vim.o.signcolumn = "yes" -- Keep signcolumn on by default
 vim.o.wrap = false
 vim.o.cursorcolumn = false
-vim.o.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
+vim.o.ignorecase = true                                             -- Case insensitive searching UNLESS /C or capital in search
 vim.o.smartindent = true
 vim.o.termguicolors = os.getenv('TERM_PROGRAM') ~= 'Apple_Terminal' -- Exclude Apple Terminal
-vim.o.undofile = true -- Save undo history
+vim.o.undofile = true                                               -- Save undo history
 vim.o.number = true
-vim.wo.number = true -- Make line numbers default
-vim.o.mouse = 'a'    -- Enable mouse mode
+vim.wo.number = true                                                -- Make line numbers default
+vim.o.mouse = 'a'                                                   -- Enable mouse mode
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -116,24 +116,24 @@ vim.keymap.set("n", "<space>st", function()
 end)
 
 vim.pack.add({
-	{ src = 'https://github.com/neovim/nvim-lspconfig' },             -- LSP Configuration & Plugins
-	{ src = "https://github.com/tpope/vim-fugitive" },                -- Git commands in nvim
-	{ src = "https://github.com/tpope/vim-rhubarb" },                 -- Enables `:Gbrowse` to open the current file on GitHub
-	{ src = "https://github.com/tpope/vim-sleuth" },                  -- Automatically set the 'shiftwidth' and 'expandtab' options based on the current file
-	{ src = "https://github.com/tpope/vim-surround" },                -- Surround text objects with symbols
-	{ src = "https://github.com/tpope/vim-repeat" },                  -- Enable repeating of plugin commands with `.`
-	{ src = "https://github.com/tpope/vim-dadbod" },                  -- Database interface
-	{ src = "https://github.com/kristijanhusak/vim-dadbod-ui" },      -- UI for vim-dadbod
+	{ src = 'https://github.com/neovim/nvim-lspconfig' },               -- LSP Configuration & Plugins
+	{ src = "https://github.com/tpope/vim-fugitive" },                  -- Git commands in nvim
+	{ src = "https://github.com/tpope/vim-rhubarb" },                   -- Enables `:Gbrowse` to open the current file on GitHub
+	{ src = "https://github.com/tpope/vim-sleuth" },                    -- Automatically set the 'shiftwidth' and 'expandtab' options based on the current file
+	{ src = "https://github.com/tpope/vim-surround" },                  -- Surround text objects with symbols
+	{ src = "https://github.com/tpope/vim-repeat" },                    -- Enable repeating of plugin commands with `.`
+	{ src = "https://github.com/tpope/vim-dadbod" },                    -- Database interface
+	{ src = "https://github.com/kristijanhusak/vim-dadbod-ui" },        -- UI for vim-dadbod
 	{ src = "https://github.com/kristijanhusak/vim-dadbod-completion" }, -- Completion source for vim-dadbod
-	{ src = "https://github.com/github/copilot.vim" },                -- GitHub Copilot
-	{ src = "https://github.com/stevearc/oil.nvim" },                 -- File explorer
+	{ src = "https://github.com/github/copilot.vim" },                  -- GitHub Copilot
+	{ src = "https://github.com/stevearc/oil.nvim" },                   -- File explorer
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter",        version = "main" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim",          version = "0.1.8" },
 	{ src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
-	{ src = "https://github.com/stevearc/conform.nvim"	},
-	{ src = "https://github.com/saghen/blink.cmp"	},
+	{ src = "https://github.com/stevearc/conform.nvim" },
+	{ src = "https://github.com/saghen/blink.cmp",                       version = "v1.*" },
 })
 local function pack_clean()
 	local active_plugins = {}
@@ -190,6 +190,15 @@ vim.lsp.config("lua_ls", {
 			},
 		},
 	},
+})
+
+require("blink.cmp").setup({
+	keymap     = { preset = "default" },
+	fuzzy      = { implementation = "lua" },
+	appearance = {
+		use_nvim_cmp_as_default = true,
+	},
+	signature  = { enabled = true },
 })
 
 require("oil").setup {
@@ -263,7 +272,7 @@ map({ "n" }, "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 map({ "n", "v", "x" }, "<leader>lf", vim.lsp.buf.format, { desc = "Format current buffer" })
 
 local builtin = require("telescope.builtin")
-local function find_files()  builtin.find_files({ no_ignore = true }) end
+local function find_files() builtin.find_files({ no_ignore = true }) end
 map({ "n" }, "<leader>g", builtin.live_grep)
 map({ "n" }, "<leader>sf", find_files)
 map({ "n" }, "<leader>sg", builtin.git_files)
