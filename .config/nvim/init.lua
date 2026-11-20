@@ -1,7 +1,6 @@
 -- Set mapleader before loading any plugins
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.g.copilot_filetypes = { VimspectorPrompt = false }
 
 vim.o.colorcolumn = '80'
 vim.o.winborder = "rounded"
@@ -9,7 +8,7 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.showtabline = 2
 vim.o.signcolumn = "yes" -- Keep signcolumn on by default
-vim.o.wrap = false
+--vim.o.wrap = false
 vim.o.cursorcolumn = false
 vim.o.ignorecase = true                                             -- Case insensitive searching UNLESS /C or capital in search
 vim.o.smartindent = true
@@ -115,6 +114,13 @@ vim.keymap.set("n", "<space>st", function()
 	vim.api.nvim_win_set_height(0, 15)
 end)
 
+-- Files
+vim.api.nvim_create_user_command("CopyPath", function()
+	local path = vim.fn.expand("%:p")
+	vim.fn.setreg("+", path)
+	vim.notify('Copied "' .. path .. '" to the clipboard!')
+end, {})
+
 vim.pack.add({
 	{ src = 'https://github.com/neovim/nvim-lspconfig' },               -- LSP Configuration & Plugins
 	{ src = "https://github.com/tpope/vim-fugitive" },                  -- Git commands in nvim
@@ -125,7 +131,6 @@ vim.pack.add({
 	{ src = "https://github.com/tpope/vim-dadbod" },                    -- Database interface
 	{ src = "https://github.com/kristijanhusak/vim-dadbod-ui" },        -- UI for vim-dadbod
 	{ src = "https://github.com/kristijanhusak/vim-dadbod-completion" }, -- Completion source for vim-dadbod
-	{ src = "https://github.com/github/copilot.vim" },                  -- GitHub Copilot
 	{ src = "https://github.com/stevearc/oil.nvim" },                   -- File explorer
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter",        version = "main" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim",          version = "0.1.8" },
@@ -217,7 +222,13 @@ require("conform").setup({
 		lua = { "stylua" },
 		javascript = { "prettierd", "prettier", stop_after_first = true },
 		html = { "prettierd", "prettier" },
+		json = { "prettierd", "prettier" },
+		jsonc = { "prettierd", "prettier" },
 		template = { "prettierd", "prettier" },
+	},
+	format_on_save = {
+		timeout_ms = 500,
+		lsp_fallback = true,
 	},
 })
 
